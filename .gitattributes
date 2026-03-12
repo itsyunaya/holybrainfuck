@@ -1,0 +1,2 @@
+# Force all .hh files to be detected as HolyC
+*.hh linguist-language=HolyC
