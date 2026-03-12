@@ -9,6 +9,10 @@ extern "c" I64 getchar();
 #define NULL 0
 #endif
 
+#ifndef EOF
+#define EOF -1
+#endif
+
 #ifndef EXIT_SUCCESS
 #define EXIT_SUCCESS 0
 #endif

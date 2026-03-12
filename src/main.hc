@@ -14,6 +14,7 @@ MemSet(tape, 0, 8 * 30000);
 U64 *ptr = &tape[0];
 
 I64 c;
+I64 inputChar;
 for (c = 0; c < len; c++) {
     switch (file[c]) {
 	/* Trying to index out of bounds of the 30k entry array will result in 
@@ -26,8 +27,13 @@ for (c = 0; c < len; c++) {
 	/* Spec compliance: if the char to print is 
 	   larger than 255, only print the first byte. */
     case '.': "%c", (*ptr & 0xFF); break;
-	/* Spec compliance: only get one byte of input. */
-    case ',': *ptr = getchar() & 0xFF; break;
+	/* Spec compliance: only get one byte of input, and leave cell unchanged 
+       if receiving EOF */
+    case ',':
+        inputChar = getchar();
+        if (inputChar == EOF) break;
+        *ptr = inputChar & 0xFF;
+        break;
     case '[':
         if (!*ptr) {
         I64 depth = 1;
